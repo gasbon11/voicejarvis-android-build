@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.voicejarvis.app">
+
+    <!-- Ses ve Wake Word İzinleri -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    
+    <!-- Ağ ve AI API İzinleri -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <!-- Sistem Seviyesi ve Donanım İzinleri -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" 
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <application
+        android:name=".VoiceJarvisApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_voicejarvis"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_voicejarvis"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.VoiceJarvis">
+
+        <!-- Ana Kurulum ve Ayarlar Ekranı -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Erişilebilirlik Servisi (Tüm Ekranı Okuma ve Tıklama Yeteneği) -->
+        <service
+            android:name=".accessibility.VoiceAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <!-- Arka Planda Sessizce Sadece 'Jarvis' Dinleyen Foreground Service -->
+        <service
+            android:name=".wakeword.PorcupineWakeWordService"
+            android:foregroundServiceType="microphone"
+            android:exported="false" />
+
+    </application>
+</manifest>
