@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.VoiceJarvis" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">@color/voicejarvis_blue</item>
+        <item name="android:navigationBarColor">@color/voicejarvis_background</item>
+        <item name="android:statusBarColor">@color/voicejarvis_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
