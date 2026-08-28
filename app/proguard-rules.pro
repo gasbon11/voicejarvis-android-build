@@ -1,0 +1,1 @@
+# VoiceJarvis keeps the default Android optimized ProGuard rules.
